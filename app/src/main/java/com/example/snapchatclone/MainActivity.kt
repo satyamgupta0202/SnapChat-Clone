@@ -1,9 +1,8 @@
 package com.example.snapchatclone
 
-import android.R.attr.password
+
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -32,42 +31,31 @@ class MainActivity : AppCompatActivity() {
 
         fun goClicked(view: View){
 
-            /// check if already user else signup
-            mAuth.signInWithEmailAndPassword(emailEditText.toString(), passwordEditText.toString())
-                .addOnCompleteListener(
-                    this
-                ) { task ->
+            mAuth.signInWithEmailAndPassword(emailEditText.toString(),passwordEditText.toString())
+                .addOnCompleteListener(this)
+                { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         login()
                     } else {
                         // If sign in fails, display a message to the user.
-                         mAuth.createUserWithEmailAndPassword(emailEditText.toString(), passwordEditText.toString()).addOnCompleteListener(this,
-                         ) { task ->
-
+                         mAuth.signInWithEmailAndPassword(emailEditText.toString(), passwordEditText.toString())
+                             .addOnCompleteListener(this)
+                             { task ->
                              if(task.isSuccessful){
-                                 //adds user to database
                                  login()
                              }
                              else{
                                  Toast.makeText(this,"Login FialedTry Ahain",Toast.LENGTH_SHORT).show()
                              }
                          }
-                        // ...
                     }
-
-                    // ...
                 }
-
         }
 
-
         fun login(){
-                // new page
+            // new page
            val intent = Intent(this,SnapsActivity::class.java)
             startActivity(intent)
         }
-
-
-
 }
