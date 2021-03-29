@@ -1,6 +1,4 @@
 package com.example.snapchatclone
-
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -31,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         fun goClicked(view: View){
 
-            mAuth.signInWithEmailAndPassword(emailEditText.toString(),passwordEditText.toString())
+            mAuth.signInWithEmailAndPassword(emailEditText?.text.toString(),passwordEditText?.text.toString())
                 .addOnCompleteListener(this)
                 { task ->
                     if (task.isSuccessful) {
@@ -39,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                         login()
                     } else {
                         // If sign in fails, display a message to the user.
-                         mAuth.signInWithEmailAndPassword(emailEditText.toString(), passwordEditText.toString())
+                         mAuth.createUserWithEmailAndPassword(emailEditText?.text.toString(), passwordEditText?.text.toString())
                              .addOnCompleteListener(this)
                              { task ->
                              if(task.isSuccessful){
