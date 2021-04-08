@@ -3,18 +3,25 @@ package com.example.snapchatclone
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
-import java.lang.Exception
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+import java.io.ByteArrayOutputStream
+import java.util.*
+
 
 class CreateSnapsActivity2 : AppCompatActivity() {
     var createSnapImageview: ImageView? = null
     var messageEditText: EditText? = null
+    val ImageName = UUID.randomUUID().toString()+".jpg"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_snaps2)
@@ -40,7 +47,7 @@ class CreateSnapsActivity2 : AppCompatActivity() {
         val selectedImage = data?.data
         if(requestCode==1 && resultCode== Activity.RESULT_OK && data!=null){
             try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver,selectedImage)
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
                 createSnapImageview?.setImageBitmap(bitmap)
 
             }
@@ -57,6 +64,27 @@ class CreateSnapsActivity2 : AppCompatActivity() {
                 getphoto()
             }
         }
+    }
+    fun nextclicked(view: View){
+
+        // Get the data from an ImageView as bytes
+        // Get the data from an ImageView as bytes
+        createSnapImageview?.setDrawingCacheEnabled(true)
+        createSnapImageview?.buildDrawingCache()
+        val bitmap = (createSnapImageview?.getDrawable() as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data: ByteArray = baos.toByteArray()
+
+
+        val uploadTask: UploadTask = FirebaseStorage.getInstance().getReference().child("images").child(ImageName).putBytes(data)
+        uploadTask.addOnFailureListener {
+            Toast.makeText(this,"upload Failed",Toast.LENGTH_SHORT).show()
+        }.addOnSuccessListener {
+            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+            // ..
+        }
+
     }
 
 }
