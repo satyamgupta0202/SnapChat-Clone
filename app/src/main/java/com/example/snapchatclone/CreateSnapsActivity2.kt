@@ -1,10 +1,8 @@
 package com.example.snapchatclone
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +11,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import java.lang.Exception
-import java.util.jar.Manifest
 
 class CreateSnapsActivity2 : AppCompatActivity() {
     var createSnapImageview: ImageView? = null
@@ -21,6 +18,8 @@ class CreateSnapsActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_snaps2)
+        createSnapImageview = findViewById(R.id.imageselect)
+       // messageEditText = findViewById(R.id.message)
     }
 
     fun getphoto() {
@@ -38,11 +37,11 @@ class CreateSnapsActivity2 : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val selectedImage = data!!.data
+        val selectedImage = data?.data
         if(requestCode==1 && resultCode== Activity.RESULT_OK && data!=null){
             try {
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver,selectedImage)
-                createSnapImageview ?.setImageBitmap(bitmap)
+                createSnapImageview?.setImageBitmap(bitmap)
 
             }
             catch (e: Exception){
