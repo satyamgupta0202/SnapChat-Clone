@@ -54,7 +54,9 @@ class CreateSnapsActivity2 : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if(requestCode==1){
-            if(grantResults.size>0 &&)
+            if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                getphoto()
+            }
         }
     }
 
