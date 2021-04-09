@@ -7,12 +7,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
-
 class MainActivity : AppCompatActivity() {
      var passwordEditText: EditText ? = null
      var emailEditText: EditText ?= null
      val mAuth = FirebaseAuth.getInstance()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                              .addOnCompleteListener(this)
                              { task ->
                              if(task.isSuccessful){
+
                                  login()
                              }
                              else{
