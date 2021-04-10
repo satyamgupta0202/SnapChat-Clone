@@ -17,7 +17,6 @@ import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
 import java.util.*
 
-
 class CreateSnapsActivity2 : AppCompatActivity() {
     var createSnapImageview: ImageView? = null
     var messageEditText: EditText? = null
@@ -81,8 +80,9 @@ class CreateSnapsActivity2 : AppCompatActivity() {
         uploadTask.addOnFailureListener {
             Toast.makeText(this,"upload Failed",Toast.LENGTH_SHORT).show()
         }.addOnSuccessListener {
-            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc
             // ..
+
         }
 
     }
