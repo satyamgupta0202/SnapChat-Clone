@@ -82,11 +82,10 @@ class CreateSnapsActivity2 : AppCompatActivity() {
         }.addOnSuccessListener {
             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc
             // ..
-
+            val intent = Intent(this,Choosesender::class.java)
+            startActivity(intent)
         }
-
     }
-
 }
 
         
