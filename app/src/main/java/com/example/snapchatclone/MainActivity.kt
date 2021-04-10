@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
      var passwordEditText: EditText ? = null
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                              .addOnCompleteListener(this)
                              { task ->
                              if(task.isSuccessful){
-
+                                 FirebaseDatabase.getInstance().getReference().child("user").child(task.result?.user!!.uid).setValue(emailEditText?.text.toString())
                                  login()
                              }
                              else{
