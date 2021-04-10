@@ -20,12 +20,12 @@ import java.util.*
 class CreateSnapsActivity2 : AppCompatActivity() {
     var createSnapImageview: ImageView? = null
     var messageEditText: EditText? = null
-    val ImageName = UUID.randomUUID().toString()+".jpg"
+    val ImageName = UUID.randomUUID().toString() + ".jpg"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_snaps2)
         createSnapImageview = findViewById(R.id.imageselect)
-       // messageEditText = findViewById(R.id.message)
+        // messageEditText = findViewById(R.id.message)
     }
 
     fun getphoto() {
@@ -44,30 +44,32 @@ class CreateSnapsActivity2 : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val selectedImage = data?.data
-        if(requestCode==1 && resultCode== Activity.RESULT_OK && data!=null){
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null) {
             try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
+                val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
                 createSnapImageview?.setImageBitmap(bitmap)
 
-            }
-            catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode==1){
-            if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == 1) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getphoto()
             }
         }
     }
-    fun nextclicked(view: View){
 
-        // Get the data from an ImageView as bytes
-        // Get the data from an ImageView as bytes
+    fun nextclicked(view: View) {
+
         createSnapImageview?.setDrawingCacheEnabled(true)
         createSnapImageview?.buildDrawingCache()
         val bitmap = (createSnapImageview?.getDrawable() as BitmapDrawable).bitmap
@@ -76,16 +78,17 @@ class CreateSnapsActivity2 : AppCompatActivity() {
         val data: ByteArray = baos.toByteArray()
 
 
-        val uploadTask: UploadTask = FirebaseStorage.getInstance().getReference().child("images").child(ImageName).putBytes(data)
+        val uploadTask: UploadTask =
+            FirebaseStorage.getInstance().reference.child("images").child(ImageName)
+                .putBytes(data)
         uploadTask.addOnFailureListener {
-            Toast.makeText(this,"upload Failed",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "upload Failed", Toast.LENGTH_SHORT).show()
         }.addOnSuccessListener {
             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc
             // ..
-            val intent = Intent(this,Choosesender::class.java)
+            val intent = Intent(this, Choosesender::class.java)
             startActivity(intent)
         }
     }
 }
-
         
