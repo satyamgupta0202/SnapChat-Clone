@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                              .addOnCompleteListener(this)
                              { task ->
                              if(task.isSuccessful){
-                                 FirebaseDatabase.getInstance().getReference().child("user").child(task.result?.user!!.uid).setValue(emailEditText?.text.toString())
+                                 FirebaseDatabase.getInstance().getReference().child("user").child(task.result?.user!!.uid).child("email").setValue(emailEditText?.text.toString())
                                  login()
                              }
                              else{

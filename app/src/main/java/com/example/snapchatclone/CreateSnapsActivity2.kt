@@ -25,7 +25,7 @@ class CreateSnapsActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_snaps2)
         createSnapImageview = findViewById(R.id.imageselect)
-        // messageEditText = findViewById(R.id.message)
+         // = findViewById(R.id.message)
     }
 
     fun getphoto() {
@@ -69,7 +69,6 @@ class CreateSnapsActivity2 : AppCompatActivity() {
     }
 
     fun nextclicked(view: View) {
-
         createSnapImageview?.setDrawingCacheEnabled(true)
         createSnapImageview?.buildDrawingCache()
         val bitmap = (createSnapImageview?.getDrawable() as BitmapDrawable).bitmap
