@@ -76,7 +76,6 @@ class CreateSnapsActivity2 : AppCompatActivity() {
         bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data: ByteArray = baos.toByteArray()
 
-
         val uploadTask: UploadTask =
             FirebaseStorage.getInstance().reference.child("images").child(ImageName)
                 .putBytes(data)
