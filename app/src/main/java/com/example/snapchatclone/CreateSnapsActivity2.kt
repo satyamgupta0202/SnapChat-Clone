@@ -85,6 +85,8 @@ class CreateSnapsActivity2 : AppCompatActivity() {
             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc
             // ..
             val intent = Intent(this, Choosesender::class.java)
+            intent.putExtra("imagename",ImageName)
+            intent.putExtra("message",messageEditText?.toString())
             startActivity(intent)
         }
     }
