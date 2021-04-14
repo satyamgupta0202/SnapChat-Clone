@@ -81,14 +81,12 @@ class CreateSnapsActivity2 : AppCompatActivity() {
                 .putBytes(data)
         uploadTask.addOnFailureListener {
             Toast.makeText(this, "upload Failed", Toast.LENGTH_SHORT).show()
-        }.addOnSuccessListener {
-            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc
-            // ..
+        }.addOnSuccessListener { taskSnapshot ->
+            val downloadUrl = taskSnapshot.uploadSessionUri
             val intent = Intent(this, Choosesender::class.java)
-            intent.putExtra("imagename",ImageName)
-            intent.putExtra("message",messageEditText?.toString())
+            intent.putExtra("imagename", ImageName)
+            intent.putExtra("message", messageEditText?.toString())
             startActivity(intent)
         }
     }
 }
-        
