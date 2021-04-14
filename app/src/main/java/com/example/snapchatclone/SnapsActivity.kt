@@ -5,18 +5,39 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import java.util.zip.Inflater
 
 
 class SnapsActivity : AppCompatActivity() {
     var snapListView:ListView? = null
     val mAuth = FirebaseAuth.getInstance()
+    var emails:ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_snaps)
         snapListView = findViewById(R.id.snapslistView)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,emails)
+        snapListView?.adapter = adapter
+
+        mAuth.currentUser?.uid?.let {
+            FirebaseDatabase.getInstance().getReference().child("user").child(it).child("snap").addChildEventListener(object: ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                emails.add(snapshot.child("from").value as String)
+                adapter.notifyDataSetChanged()
+            }
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+            override fun onCancelled(error: DatabaseError) {}
+        })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -37,7 +58,6 @@ class SnapsActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
     override fun onBackPressed() {
         super.onBackPressed()
         mAuth.signOut()
