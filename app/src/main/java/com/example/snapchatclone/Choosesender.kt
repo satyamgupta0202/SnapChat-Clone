@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 
 class Choosesender : AppCompatActivity() {
+
     var chooseuserListView: ListView? = null
     var emails: ArrayList<String> = ArrayList()
     var keys: ArrayList<String> = ArrayList()
@@ -37,7 +38,7 @@ class Choosesender : AppCompatActivity() {
             })
 
     chooseuserListView?.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-        val snapMap: Map<String, String?> = mapOf("from" to FirebaseAuth.getInstance().currentUser!!.email!! , "message" to intent.getStringExtra("message"), "imafeName" to intent.getStringExtra(("imagename")))
+        val snapMap: Map<String, String?> = mapOf("from" to FirebaseAuth.getInstance().currentUser!!.email!! , "message" to intent.getStringExtra("message"), "imageName" to intent.getStringExtra(("imagename")))
         FirebaseDatabase.getInstance().getReference().child("user").child(keys.get(position)).child("snap").push().setValue(snapMap)
         val intent = Intent(this,CreateSnapsActivity2::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
