@@ -48,7 +48,7 @@ class SnapsActivity : AppCompatActivity() {
 
             val snapshot = snaps.get(position)
             var intent = Intent(this,viewSnapActivity::class.java)
-            intent.putExtra("imageName" , snapshot.child("imagename").value as String)
+            intent.putExtra("imagename" , snapshot.child("imagename").value as String)
             //////
             intent.putExtra("imageUrl",snapshot.child("imageURL").value as String)
             ///////
