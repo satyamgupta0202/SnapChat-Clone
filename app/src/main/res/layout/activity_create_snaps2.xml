@@ -8,22 +8,23 @@
 
     <ImageView
         android:id="@+id/imageselect"
-        android:layout_width="113dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="186dp"
+        android:layout_height="195dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="123dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <Button
         android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
+        android:layout_width="106dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="139dp"
         android:layout_marginTop="13dp"
-        android:layout_marginEnd="166dp"
+        android:layout_marginEnd="139dp"
         android:onClick="uploadImage"
         android:text="Upload"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,23 +35,28 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="149dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="151dp"
         android:onClick="nextclicked"
         android:text="Next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message" />
 
-    <TextView
+    <EditText
         android:id="@+id/message"
-        android:layout_width="144dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="18dp"
-        android:text="TextView"
+        android:layout_width="234dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="100dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Message"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upload" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
